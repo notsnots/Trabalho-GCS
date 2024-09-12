@@ -1,6 +1,9 @@
 package edu.pucrs.br.player;
 
+import edu.pucrs.br.item.ItemEntity;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Players {
     private final ArrayList<PlayerEntity> players = new ArrayList<>();
@@ -31,5 +34,31 @@ public class Players {
         }
         
         return false;
+    }
+
+    public void listItensByPrice() {
+
+        if(players.isEmpty()) {
+            System.out.println("Nenhum jogador encontrado!");
+            return;
+        }
+
+        for (PlayerEntity player : this.players)
+        {
+            ArrayList<ItemEntity> items = player.getItems();
+
+            if(items.isEmpty()){
+                System.out.println("Nenhum item encontrado para o player: " + player.getFullName());
+                continue;
+            }
+                System.out.println("Itens do Player: " + player.getFullName()+": ");
+
+            items.sort(Comparator.comparing(ItemEntity::getPrice));
+
+            for(ItemEntity item : items){
+                System.out.println(item.toString());
+            }
+            System.out.println();
+        }
     }
 }

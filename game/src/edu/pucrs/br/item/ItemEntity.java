@@ -41,4 +41,9 @@ public class ItemEntity {
     public double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return type + " " + name + ", Preço: " + price;
+    }
 }

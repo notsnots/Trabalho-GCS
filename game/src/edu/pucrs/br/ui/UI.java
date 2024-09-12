@@ -17,6 +17,7 @@ public class UI {
     private void initUI() {
         System.out.println("Seja bem-vindo ao NOME_DO_JOGO!");
 
+        //this.listPlayersItens();
         this.showAuthMenu();
     }
 
@@ -64,5 +65,9 @@ public class UI {
 
     private void register() {
         // TODO: Implementar sistema de registro
+    }
+
+    private void listPlayersItens(){
+        players.listItensByPrice();
     }
 }
