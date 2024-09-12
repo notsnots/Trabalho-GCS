@@ -48,7 +48,18 @@ public class UI {
     }
 
     private void login() {
-        // TODO: Implementar sistema de login
+        System.out.println("Digite o seu email: ");
+        String email = this.scanner.next();
+        System.out.println("Digite seu PIN: ");
+        String pin = this.scanner.next();
+
+        boolean result = this.players.login(email,pin);
+        if(result){
+            System.out.println("Login efetuado com sucesso!");
+        }else{
+            System.out.println("Erro ao fazer login!");
+            this.showAuthMenu();
+        }
     }
 
     private void register() {
