@@ -5,7 +5,7 @@
 - [Eduardo Rosa](https://github.com/notsnots)
 - Bernardo Kirsch
 - Pedro Petrini
-- Bernardo Medeiros
+- [Bernardo Medeiros](https://github.com/BernardoLykawka)
 - Erick Carpes
 - Felipe Rambor
 - Iuri Queiroz
