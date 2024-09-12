@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Players {
     private final ArrayList<PlayerEntity> players = new ArrayList<>();
+    private PlayerEntity currentPlayer;
 
     /*
         Este método é responsável por adicionar um jogador à lista de jogadores.
@@ -23,6 +24,12 @@ public class Players {
                 .filter(p -> p.getEmail().equals(email) && p.getPasswordPin().equals(pin))
                 .findFirst()
                 .orElse(null);
-        return player != null;
+
+        if (player != null) {
+            this.currentPlayer = player;
+            return true;
+        }
+        
+        return false;
     }
 }
