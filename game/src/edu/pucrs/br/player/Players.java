@@ -17,4 +17,12 @@ public class Players {
             System.out.println("Erro ao adicionar jogador: " + exception.getMessage());
         }
     }
+
+    public boolean login(String email, String pin) {
+        PlayerEntity player = players.stream()
+                .filter(p -> p.getEmail().equals(email) && p.getPasswordPin().equals(pin))
+                .findFirst()
+                .orElse(null);
+        return player != null;
+    }
 }
