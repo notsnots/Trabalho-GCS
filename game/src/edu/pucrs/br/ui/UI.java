@@ -17,7 +17,6 @@ public class UI {
     private void initUI() {
         System.out.println("Seja bem-vindo ao NOME_DO_JOGO!");
 
-        //this.listPlayersItens();
         this.showAuthMenu();
     }
 
@@ -74,7 +73,7 @@ public class UI {
                         System.out.println("Pendente de implementação: Iuri Queiroz");
                         break;
                     case 2:
-                        System.out.println("Pendente de implementação: Bernardo Medeiros");
+                        this.listPlayersItens();
                         break;
                     case 3:
                         System.out.println("Pendente de implementação: Felipe Rambor");
