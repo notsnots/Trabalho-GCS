@@ -4,10 +4,18 @@ import edu.pucrs.br.item.ItemEntity;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.UUID;
 
 public class Players {
     private final ArrayList<PlayerEntity> players = new ArrayList<>();
     private PlayerEntity currentPlayer;
+
+    public PlayerEntity getByEmail(String email) {
+        return players.stream()
+                .filter(p -> p.getEmail().equals(email))
+                .findFirst()
+                .orElse(null);
+    }
 
     /*
         Este método é responsável por adicionar um jogador à lista de jogadores.

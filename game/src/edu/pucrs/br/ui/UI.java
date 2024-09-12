@@ -1,15 +1,18 @@
 package edu.pucrs.br.ui;
 
 import edu.pucrs.br.player.Players;
+import edu.pucrs.br.trade.Trades;
 
 import java.util.Scanner;
 
 public class UI {
     private Scanner scanner = new Scanner(System.in);
     private Players players;
+    private Trades trades;
 
-    public UI(Players players) {
+    public UI(Players players, Trades trades) {
         this.players = players;
+        this.trades = trades;
 
         this.initUI();
     }
