@@ -9,7 +9,7 @@
 - Erick Carpes
 - Felipe Rambor
 - Iuri Queiroz
-- Regis Junior
+- [Regis Junior](https://github.com/regisamxjr)
 - Pedro Henrique de Oliveira
 - Luiza Michel
 
