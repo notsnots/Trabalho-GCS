@@ -2,7 +2,7 @@
 
 ### Grupo:
 - [Lucas Arieta](https://github.com/lucasarieta)
-- Eduardo Rosa
+- [Eduardo Rosa](https://github.com/notsnots)
 - Bernardo Kirsch
 - Pedro Petrini
 - Bernardo Medeiros
