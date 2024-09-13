@@ -1,5 +1,6 @@
 package edu.pucrs.br.ui;
 
+import edu.pucrs.br.player.PlayerEntity;
 import edu.pucrs.br.player.Players;
 import edu.pucrs.br.trade.Trades;
 
@@ -122,7 +123,28 @@ public class UI {
     }
 
     private void register() {
-        // TODO: Implementar sistema de registro
+       //solicita aos usuarios os dados para cadastro
+        System.out.print("Digite o seu nome completo: \n");
+        String fullName = this.scanner.next();
+        System.out.print("Digite o seu email: \n");
+        String email = this.scanner.next();
+        System.out.print("Digite o seu PIN (6 digitos): \n");
+        String pin = this.scanner.next();
+
+        //verifica se o pin tem 6 digitos
+        if (pin.length() != 6) {
+            System.out.print("O PIN deve conter 6 digitos. \n");
+            return;
+        }
+        //verifica se o email ja esta em uso
+        if (this.players.getByEmail(email) != null) {
+            System.out.print("Email ja esta em uso. \n");
+            return;
+        }
+       //cria um novo jogador
+        PlayerEntity newPlayer = new PlayerEntity(email, fullName, pin);
+        this.players.addPlayer(newPlayer);
+        System.out.print("Cadastro realizado com sucesso! \n");
     }
 
     private void listPlayersItens(){
