@@ -6,7 +6,7 @@
 - Bernardo Kirsch
 - Pedro Petrini
 - [Bernardo Medeiros](https://github.com/BernardoLykawka)
-- Erick Carpes
+- [Erick Carpes](https://github.com/erickcarpes)
 - Felipe Rambor
 - Iuri Queiroz
 - [Regis Junior](https://github.com/regisamxjr)
