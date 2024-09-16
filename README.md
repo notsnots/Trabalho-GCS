@@ -3,18 +3,18 @@
 ### Grupo:
 - [Lucas Arieta](https://github.com/lucasarieta)
 - [Eduardo Rosa](https://github.com/notsnots)
-- Bernardo Kirsch
+- [Bernardo Kirsch](https://github.com/kirschzao)  
 - Pedro Petrini
 - [Bernardo Medeiros](https://github.com/BernardoLykawka)
 - [Erick Carpes](https://github.com/erickcarpes)
 - Felipe Rambor
 - Iuri Queiroz
 - [Regis Junior](https://github.com/regisamxjr)
-- Pedro Henrique de Oliveira
+- [Pedro Henrique de Oliveira](https://github.com/deoliveiraph)
 - Luiza Michel
 
-### Como contribuir:
 
+### Como contribuir:
 1. Clone o repositório
 2. Crie uma branch com o nome da feature que você deseja adicionar
 3. Faça as alterações
