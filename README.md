@@ -15,7 +15,6 @@
 
 
 ### Como contribuir:
-
 1. Clone o repositório
 2. Crie uma branch com o nome da feature que você deseja adicionar
 3. Faça as alterações
