@@ -24,12 +24,16 @@ public class UI {
         this.showAuthMenu();
     }
 
-    private void showAuthMenu() {
+    private void authMenuOptions() {
         System.out.println("[===================]");
         System.out.println("1 - Login");
         System.out.println("2 - Cadastro");
         System.out.println("[===================]");
         System.out.print("Digite a opcao desejada: ");
+    }
+
+    private void showAuthMenu() {
+       this.authMenuOptions();
 
         try {
             do {
@@ -42,7 +46,7 @@ public class UI {
                         register();
                         break;
                     default:
-                        System.out.println("Opcao invalida. Redigite.");
+                        authMenuOptions();
                 }
             } while (true);
         } catch (Exception e) {
@@ -107,44 +111,46 @@ public class UI {
     }
 
     private void login() {
-        System.out.println("Digite o seu email: ");
+        System.out.print("[Login] Digite o seu email: ");
         String email = this.scanner.next();
-        System.out.println("Digite o seu PIN: ");
+        System.out.print("[Login] Digite o seu PIN: ");
         String pin = this.scanner.next();
 
         boolean result = this.players.login(email,pin);
         if(result){
-            System.out.println("Login efetuado com sucesso!");
+            System.out.println("[Login] Bem-vindo(a) " + email + "!");
             this.onLogin();
         }else{
-            System.out.println("Erro ao fazer login!");
+            System.out.println("[Login] Email ou PIN incorretos!");
             this.showAuthMenu();
         }
     }
 
     private void register() {
-       //solicita aos usuarios os dados para cadastro
-        System.out.println("Digite o seu nome completo: ");
+        System.out.print("[Cadastro] Digite o seu nome: ");
         String fullName = this.scanner.next();
-        System.out.println("Digite o seu email: \n");
+        System.out.print("[Cadastro] Digite o seu email:");
         String email = this.scanner.next();
-        System.out.println("Digite o seu PIN (6 digitos): ");
+        System.out.print("[Cadastro] Digite o seu PIN (6 digitos): ");
         String pin = this.scanner.next();
 
-        //verifica se o pin tem 6 digitos
         if (pin.length() != 6) {
-            System.out.println("O PIN deve conter 6 digitos. ");
+            System.out.println("[Cadastro] O PIN deve conter 6 digitos. ");
+            this.showAuthMenu();
             return;
         }
-        //verifica se o email ja esta em uso
+
         if (this.players.getByEmail(email) != null) {
-            System.out.println("Email ja esta em uso. ");
+            System.out.println("[Cadastro] Email ja esta em uso. ");
+            this.showAuthMenu();
             return;
         }
-       //cria um novo jogador
+
         PlayerEntity newPlayer = new PlayerEntity(email, fullName, pin);
         this.players.addPlayer(newPlayer);
-        System.out.println("Cadastro realizado com sucesso! ");
+
+        System.out.println("[Cadastro] O novo jogador foi cadastrado com sucesso!");
+        this.showAuthMenu();
     }
 
     private void listPlayersItens(){
