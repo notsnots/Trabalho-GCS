@@ -124,27 +124,27 @@ public class UI {
 
     private void register() {
        //solicita aos usuarios os dados para cadastro
-        System.out.print("Digite o seu nome completo: \n");
+        System.out.println("Digite o seu nome completo: ");
         String fullName = this.scanner.next();
-        System.out.print("Digite o seu email: \n");
+        System.out.println("Digite o seu email: \n");
         String email = this.scanner.next();
-        System.out.print("Digite o seu PIN (6 digitos): \n");
+        System.out.println("Digite o seu PIN (6 digitos): ");
         String pin = this.scanner.next();
 
         //verifica se o pin tem 6 digitos
         if (pin.length() != 6) {
-            System.out.print("O PIN deve conter 6 digitos. \n");
+            System.out.println("O PIN deve conter 6 digitos. ");
             return;
         }
         //verifica se o email ja esta em uso
         if (this.players.getByEmail(email) != null) {
-            System.out.print("Email ja esta em uso. \n");
+            System.out.println("Email ja esta em uso. ");
             return;
         }
        //cria um novo jogador
         PlayerEntity newPlayer = new PlayerEntity(email, fullName, pin);
         this.players.addPlayer(newPlayer);
-        System.out.print("Cadastro realizado com sucesso! \n");
+        System.out.println("Cadastro realizado com sucesso! ");
     }
 
     private void listPlayersItens(){
