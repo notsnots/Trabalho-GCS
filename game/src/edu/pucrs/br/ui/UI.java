@@ -1,9 +1,11 @@
 package edu.pucrs.br.ui;
 
+import edu.pucrs.br.item.ItemEntity;
 import edu.pucrs.br.player.PlayerEntity;
 import edu.pucrs.br.player.Players;
+import edu.pucrs.br.trade.TradeEntity;
 import edu.pucrs.br.trade.Trades;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
@@ -90,7 +92,7 @@ public class UI {
                         System.out.println("Pendente de implementação: Luiza Mitchell");
                         break;
                     case 5:
-                        System.out.println("Pendente de implementação: Bernardo Kirsch");
+                        this.createTradeProposal();
                         break;
                     case 6:
                         System.out.println("Pendente de implementação: Eduardo Rosa");
@@ -155,5 +157,119 @@ public class UI {
 
     private void listPlayersItens(){
         players.listItensByPrice();
+    }
+
+    private void createTradeProposal() {
+        PlayerEntity targetPlayer;
+
+        while (true) {
+            System.out.print("[Trade] Digite o email do jogador que deseja trocar (para cancelar digite NA): ");
+            String targetEmail = this.scanner.next();
+
+            if (targetEmail.equalsIgnoreCase("na")) {
+                System.out.println("[Trade] Operação cancelada");
+                return;
+            }
+
+            targetPlayer = this.players.getByEmail(targetEmail);
+
+            if (targetPlayer != null) {
+                break;
+            } else {
+                System.out.println("[Trade] Jogador não encontrado. Tente novamente.");
+            }
+        }
+
+        ArrayList<ItemEntity> targetItems = targetPlayer.getItems();
+        if (targetItems.size() <= 0) {
+            System.out.println("[Trade] O jogador " + targetPlayer.getFullName() + " não possui nenhum item disponível para troca.");
+            return;
+        }
+
+        StringBuilder availableItems = new StringBuilder();
+        for (int i = 0; i < targetItems.size(); i++) {
+            ItemEntity item = targetItems.get(i);
+            availableItems
+                    .append(i + 1)
+                    .append(" - ")
+                    .append(item.getName())
+                    .append(" : ")
+                    .append("$")
+                    .append(item.getPrice())
+                    .append(" : ")
+                    .append(item.getType())
+                    .append("\n");
+        }
+
+        System.out.println("[Trade] Jogador encontrado: " + targetPlayer.getFullName());
+        System.out.println("[Trade] Itens disponíveis para troca: ");
+        System.out.println(availableItems.toString());
+        System.out.print("[Trade] Digite o número do item que deseja trocar (para cancelar digite 0): ");
+
+        int targetItemIndex = this.scanner.nextInt();
+        if (targetItemIndex <= 0) {
+            System.out.println("[Trade] Operação cancelada");
+            return;
+        }
+
+        if (targetItemIndex > targetItems.size()) {
+            System.out.println("[Trade] Item não encontrado. Tente novamente.");
+            return;
+        }
+
+        ItemEntity targetItem = targetItems.get(targetItemIndex - 1);
+        System.out.print("[Trade] Você confirma que deseja trocar o item " + targetItem.getName() + " por um item seu? (S/N) ");
+
+        String confirm = this.scanner.next();
+        if (confirm.equalsIgnoreCase("n")) {
+            System.out.println("[Trade] Operação cancelada");
+            return;
+        }
+
+        System.out.println("[Trade] Certo! Agora escolha o seu item que deseja dar em troca:");
+        PlayerEntity currentPlayer = this.players.getCurrentPlayer();
+        ArrayList<ItemEntity> currentPlayerItems = currentPlayer.getItems();
+
+        if (currentPlayerItems.size() <= 0) {
+            System.out.println("[Trade] Você não possui nenhum item disponível para troca.");
+            return;
+        }
+
+        availableItems = new StringBuilder();
+        for (int i = 0; i < currentPlayerItems.size(); i++) {
+            ItemEntity item = currentPlayerItems.get(i);
+            availableItems
+                    .append(i + 1)
+                    .append(" - ")
+                    .append(item.getName())
+                    .append(" : ")
+                    .append("$")
+                    .append(item.getPrice())
+                    .append(" : ")
+                    .append(item.getType())
+                    .append("\n");
+        }
+
+        System.out.println("[Trade] Seus itens disponíveis para troca: ");
+        System.out.println(availableItems.toString());
+        System.out.print("[Trade] Digite o número do item que deseja trocar (para cancelar digite 0):");
+
+        int sourceItemIndex = this.scanner.nextInt();
+        if (sourceItemIndex <= 0) {
+            System.out.println("[Trade] Operação cancelada");
+            return;
+        }
+
+        if (sourceItemIndex > currentPlayerItems.size()) {
+            System.out.println("[Trade] Item não encontrado. Tente novamente.");
+            return;
+        }
+
+        ItemEntity sourceItem = currentPlayerItems.get(sourceItemIndex - 1);
+        TradeEntity trade = new TradeEntity(currentPlayer, targetPlayer, sourceItem.getId(), targetItem.getId());
+        this.trades.createTrade(trade);
+
+        System.out.println("[Trade] Proposta de troca enviada com sucesso!");
+        this.showOptionsMenu();
     }
 }

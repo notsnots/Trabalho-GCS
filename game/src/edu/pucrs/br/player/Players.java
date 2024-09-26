@@ -1,10 +1,8 @@
 package edu.pucrs.br.player;
 
 import edu.pucrs.br.item.ItemEntity;
-
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.UUID;
 
 public class Players {
     private final ArrayList<PlayerEntity> players = new ArrayList<>();
@@ -15,6 +13,10 @@ public class Players {
                 .filter(p -> p.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public PlayerEntity getCurrentPlayer() {
+        return this.currentPlayer;
     }
 
     /*
