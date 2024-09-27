@@ -1,6 +1,9 @@
 package edu.pucrs.br.trade;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import edu.pucrs.br.player.PlayerEntity;
 
 public class Trades {
     public ArrayList<TradeEntity> trades = new ArrayList<>();
@@ -11,5 +14,11 @@ public class Trades {
     */
     public void createTrade(TradeEntity trade) {
         this.trades.add(trade);
+    }
+
+    public ArrayList<TradeEntity> getPendingTradesForPlayer(PlayerEntity p){
+         return trades.stream()
+        .filter(trade -> trade.getTargetPlayer().getEmail().equals(p.getEmail()) && !trade.isAccepted())
+        .collect(Collectors.toCollection(ArrayList::new));
     }
 }
