@@ -89,7 +89,7 @@ public class UI {
                         System.out.println("Pendente de implementação: Felipe Rambor");
                         break;
                     case 4:
-                        System.out.println("Pendente de implementação: Luiza Mitchell");
+                        this.searchItems();
                         break;
                     case 5:
                         this.createTradeProposal();
@@ -272,4 +272,11 @@ public class UI {
         System.out.println("[Trade] Proposta de troca enviada com sucesso!");
         this.showOptionsMenu();
     }
+    private void searchItems(){
+        System.out.println("Digite o nome do termo que gostaria de buscar");
+        String nome = this.scanner.next();
+        players.SearchItem(nome);
+    }
+
+
 }
