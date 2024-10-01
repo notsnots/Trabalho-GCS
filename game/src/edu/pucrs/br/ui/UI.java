@@ -289,6 +289,7 @@ public class UI {
     }
 
     public void showPendingTrades() {
+<<<<<<< HEAD
         PlayerEntity p = this.players.getCurrentPlayer();
 
         ArrayList<TradeEntity> pendingTrades = this.trades.getPendingTrades(p);
@@ -313,4 +314,46 @@ public class UI {
             count++;
         }
     }
+=======
+        //Pega o player atual
+        PlayerEntity p = this.players.getCurrentPlayer();
+    
+        //Tratamento de excecao
+        try {
+            //Verifica se o player não é null
+            if (p != null) {
+                //
+                ArrayList<TradeEntity> pendingTrades = this.trades.getPendingTradesForPlayer(p);
+                
+                if (pendingTrades.isEmpty()) {
+                    System.out.println("[Trade] O jogador não tem nenhuma proposta de troca aberta.");
+                } else {
+                    System.out.println("[Trade] Propostas de troca pendentes: ");
+                    int count = 1;
+    
+                    for (TradeEntity trade : pendingTrades) {
+                    
+                        ItemEntity sourceItem = p.getItem(trade.getSourceItem()); 
+                        ItemEntity targetItem = trade.getTargetPlayer().getItem(trade.getTargetItem());
+    
+                        if (sourceItem != null && targetItem != null) {
+                            System.out.println(count + " - " +
+                                "[Trade] Jogador: " + trade.getSourcePlayer().getFullName() + " | " +
+                                "[Trade] Item oferecido: " + sourceItem.getName() + " | " +
+                                "[Trade] Item solicitado: " + targetItem.getName());
+                        } else {
+                            System.out.println(count + " - Erro ao recuperar itens da troca.");
+                        }
+                        count++;
+                    }
+                }
+            } else {
+                System.out.println("[Error] Nenhum jogador está logado.");
+            }
+        } catch (Exception e) {
+            System.err.println("[Error] Ocorreu um erro ao buscar as propostas de troca: " + e.getMessage());
+        }
+    }
+    
+>>>>>>> 058352aeb9648acc6a886febb9209c7d12d9af33
 }

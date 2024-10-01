@@ -46,5 +46,9 @@ public class ItemEntity {
     public String toString() {
         return type + " " + name + ", Preço: " + price;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 058352aeb9648acc6a886febb9209c7d12d9af33
 }
