@@ -28,7 +28,6 @@ public class TradeEntity {
         this.status = TradeStatus.PENDING;
     }
 
-<<<<<<< HEAD
     public PlayerEntity getTargetPlayer(){
         return this.target;
     }
@@ -47,34 +46,8 @@ public class TradeEntity {
 
     public boolean isAccepted(){
         if(this.status == TradeStatus.ACCEPTED){
-=======
-    public PlayerEntity getTargetPlayer() {
-        return this.target;
-    }
-
-    public boolean isAccepted() {
-        if (this.status == TradeStatus.ACCEPTED) {
->>>>>>> 058352aeb9648acc6a886febb9209c7d12d9af33
             return true;
         }
         return false;
     }
-<<<<<<< HEAD
-=======
-
-    public PlayerEntity getSourcePlayer() {
-        return this.source;
-    }
-
-    public UUID getSourceItem() {
-        return this.sourceItemId;
-    }
-
-    public UUID getTargetItem() {
-        return this.targetItemId;
-    }
-
-
-
->>>>>>> 058352aeb9648acc6a886febb9209c7d12d9af33
 }

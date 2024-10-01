@@ -16,7 +16,6 @@ public class Trades {
         this.trades.add(trade);
     }
 
-<<<<<<< HEAD
     public ArrayList<TradeEntity> getPendingTrades(PlayerEntity p){
         return trades
                 .stream()
@@ -26,11 +25,3 @@ public class Trades {
         .collect(Collectors.toCollection(ArrayList::new));
     }
 }
-=======
-    public ArrayList<TradeEntity> getPendingTradesForPlayer(PlayerEntity p){
-         return trades.stream()
-        .filter(trade -> trade.getTargetPlayer().getEmail().equals(p.getEmail()) && !trade.isAccepted())
-        .collect(Collectors.toCollection(ArrayList::new));
-    }
-}
->>>>>>> 058352aeb9648acc6a886febb9209c7d12d9af33
