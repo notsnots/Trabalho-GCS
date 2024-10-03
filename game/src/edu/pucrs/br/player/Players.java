@@ -3,6 +3,7 @@ package edu.pucrs.br.player;
 import edu.pucrs.br.item.ItemEntity;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class Players {
     private final ArrayList<PlayerEntity> players = new ArrayList<>();
@@ -71,4 +72,35 @@ public class Players {
             System.out.println();
         }
     }
-}
+
+    public void searchItem(String nome) {
+        String term = nome.toLowerCase();
+        boolean found = false;
+        if (players.isEmpty()) {
+            System.out.println("Nenhum jogador encontrado!");
+            return;
+        }
+        for (int i = 0; i < players.size(); i++) {
+            PlayerEntity player = players.get(i);
+            ArrayList<ItemEntity> items = player.getItems();
+
+            for (int j = 0; j < items.size(); j++) {
+                ItemEntity item = items.get(j);
+
+                if (item.getName().toLowerCase().contains(term) || item.getDescription().toLowerCase().contains(term) ||
+                        item.getType().name().toLowerCase().contains(term)) {
+
+                    System.out.println("Jogador: " + player.getFullName() + " - " + item.getName() + " " + item.getType()
+                            + " " + item.getDescription());
+                    found = true;
+
+                }
+            }
+        }
+        if (!found) {
+            System.out.println("Nao existe item com essa palavra");
+        }
+    }
+
+
+    }

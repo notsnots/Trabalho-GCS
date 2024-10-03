@@ -96,7 +96,7 @@ public class UI {
                         this.showOptionsMenu();
                         break;
                     case 4:
-                        System.out.println("Pendente de implementação: Luiza Michel");
+                        this.searchItems();
                         this.showOptionsMenu();
                         break;
                     case 5:
@@ -285,7 +285,13 @@ public class UI {
         this.trades.createTrade(trade);
 
         System.out.println("[Trade] Proposta de troca enviada com sucesso!");
-        this.showOptionsMenu();
+        this.showOptionsMenu();    
+    }
+
+    private void searchItems(){
+        System.out.println("Digite o nome do termo que gostaria de buscar");
+        String nome = this.scanner.next();
+        players.searchItem(nome);
     }
 
     public void showPendingTrades() {
