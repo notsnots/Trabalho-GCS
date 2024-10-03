@@ -30,6 +30,7 @@ public class UI {
         System.out.println("[===================]");
         System.out.println("1 - Login");
         System.out.println("2 - Cadastro");
+        System.out.println("0 - Sair do Programa");
         System.out.println("[===================]");
         System.out.print("Digite a opcao desejada: ");
     }
@@ -47,6 +48,8 @@ public class UI {
                     case 2:
                         register();
                         break;
+                    case 0:
+                        System.exit(0);
                     default:
                         authMenuOptions();
                 }
@@ -72,6 +75,7 @@ public class UI {
         System.out.println("6 - [Player] Mostrar minhas propostas de troca pendentes");
         System.out.println("7 - [Player] Detalhes sobre proposta de troca");
         System.out.println("8 - [Admin] Estatísticas do jogo");
+        System.out.println("0 - [Any] - Sair do programa");
         System.out.println("[===================]");
         System.out.print("Digite a opcao desejada: ");
 
@@ -81,30 +85,41 @@ public class UI {
                 switch (option) {
                     case 1:
                         System.out.println("Pendente de implementação: Iuri Queiroz");
+                        this.showOptionsMenu();
                         break;
                     case 2:
                         this.listPlayersItens();
+                        this.showOptionsMenu();
                         break;
                     case 3:
                         System.out.println("Pendente de implementação: Felipe Rambor");
+                        this.showOptionsMenu();
                         break;
                     case 4:
                         this.searchItems();
+                        this.showOptionsMenu();
                         break;
                     case 5:
                         this.createTradeProposal();
+                        this.showOptionsMenu();
                         break;
                     case 6:
-                        System.out.println("Pendente de implementação: Eduardo Rosa");
+                        this.showPendingTrades();
+                        this.showOptionsMenu();
                         break;
                     case 7:
                         System.out.println("Pendente de implementação: Pedro Petrini | Aceite ou recusa de troca: Erick Carpes");
+                        this.showOptionsMenu();
                         break;
                     case 8:
                         System.out.println("Pendente de implementação: Lucas Arieta");
+                        this.showOptionsMenu();
                         break;
+                    case 0:
+                        System.exit(0);
 
                     default: System.out.println("Opcao invalida. Redigite.");
+                    
                 }
             } while (true);
         } catch (Exception e) {
@@ -270,13 +285,38 @@ public class UI {
         this.trades.createTrade(trade);
 
         System.out.println("[Trade] Proposta de troca enviada com sucesso!");
-        this.showOptionsMenu();
+        this.showOptionsMenu();    
     }
+
     private void searchItems(){
         System.out.println("Digite o nome do termo que gostaria de buscar");
         String nome = this.scanner.next();
         players.searchItem(nome);
     }
 
+    public void showPendingTrades() {
+        PlayerEntity p = this.players.getCurrentPlayer();
 
+        ArrayList<TradeEntity> pendingTrades = this.trades.getPendingTrades(p);
+        if (pendingTrades.isEmpty()) {
+            System.out.println("[Trade] Nenhuma proposta de troca encontrada.");
+            return;
+        }
+
+        int count = 1;
+        System.out.println("[Trade] Propostas de troca pendentes: ");
+
+        for (TradeEntity trade : pendingTrades) {
+            ItemEntity sourceItem = p.getItem(trade.getSourceItem());
+            ItemEntity targetItem = trade.getTargetPlayer().getItem(trade.getTargetItem());
+
+            System.out.println(count + " - " +
+                "Jogador solicitante: " + trade.getSourcePlayer().getFullName() + " | " +
+                "Jogador solicitado: " + trade.getTargetPlayer().getFullName() + " | " +
+                "Item oferecido: " + sourceItem.getName() + " | " +
+                "Item solicitado: " + targetItem.getName());
+
+            count++;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package edu.pucrs.br.trade;
 
+import edu.pucrs.br.item.ItemEntity;
 import edu.pucrs.br.player.PlayerEntity;
 
 import java.util.UUID;
@@ -25,5 +26,28 @@ public class TradeEntity {
         this.sourceItemId = sourceItemId;
         this.targetItemId = targetItemId;
         this.status = TradeStatus.PENDING;
+    }
+
+    public PlayerEntity getTargetPlayer(){
+        return this.target;
+    }
+
+    public PlayerEntity getSourcePlayer(){
+        return this.source;
+    }
+
+    public UUID getTargetItem(){
+        return this.targetItemId;
+    }
+
+    public UUID getSourceItem(){
+        return this.sourceItemId;
+    }
+
+    public boolean isAccepted(){
+        if(this.status == TradeStatus.ACCEPTED){
+            return true;
+        }
+        return false;
     }
 }

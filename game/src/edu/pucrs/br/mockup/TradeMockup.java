@@ -11,8 +11,9 @@ public class TradeMockup {
         PlayerEntity playerOne = players.getByEmail("player0@gmail.com");
         PlayerEntity playerTwo = players.getByEmail("player1@gmail.com");
 
-        ItemEntity playerOneTradeItem = playerOne.getItems().get(0);
-        ItemEntity playerTwoTradeItem = playerTwo.getItems().get(0);
+        // Agora chamamos getFirst() no objeto PlayerEntity e não na lista de itens
+        ItemEntity playerOneTradeItem = playerOne.getFirst();
+        ItemEntity playerTwoTradeItem = playerTwo.getFirst();
 
         TradeEntity trade = new TradeEntity(playerOne, playerTwo, playerOneTradeItem.getId(), playerTwoTradeItem.getId());
         trades.createTrade(trade);

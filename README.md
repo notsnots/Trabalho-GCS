@@ -11,7 +11,7 @@
 - Iuri Queiroz
 - [Regis Junior](https://github.com/regisamxjr)
 - [Pedro Henrique de Oliveira](https://github.com/deoliveiraph)
-- Luiza Michel
+- [Luiza Michel](https://github.com/lu4mic)
 
 
 ### Como contribuir:
