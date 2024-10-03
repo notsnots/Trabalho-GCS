@@ -63,4 +63,11 @@ public class PlayerEntity {
             .findFirst()
             .orElse(null);
     }
+
+    public ItemEntity getFirst(){
+        if (items.isEmpty()) {
+            System.out.println("O jogador não tem itens.");
+        }
+        return items.get(0);
+    }
 }
