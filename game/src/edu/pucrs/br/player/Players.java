@@ -72,31 +72,31 @@ public class Players {
             System.out.println();
         }
     }
-    public void SearchItem(String nome){
+
+    public void searchItem(String nome) {
         String term = nome.toLowerCase();
         boolean found = false;
         if (players.isEmpty()) {
             System.out.println("Nenhum jogador encontrado!");
+            return;
         }
-            for (int i = 0; i < players.size(); i++) {
-                PlayerEntity player = players.get(i);
-                ArrayList<ItemEntity> items = player.getItems();
+        for (int i = 0; i < players.size(); i++) {
+            PlayerEntity player = players.get(i);
+            ArrayList<ItemEntity> items = player.getItems();
 
-                for (int j = 0; j < items.size(); j++) {
-                    ItemEntity item = items.get(j);
+            for (int j = 0; j < items.size(); j++) {
+                ItemEntity item = items.get(j);
 
-                    if(item.getName().toLowerCase().contains(term) || item.getDescription().toLowerCase().contains(term) ||
-                       item.getType().name().toLowerCase().contains(term)) {
+                if (item.getName().toLowerCase().contains(term) || item.getDescription().toLowerCase().contains(term) ||
+                        item.getType().name().toLowerCase().contains(term)) {
 
-                        System.out.println("Jogador: " + player.getFullName() + " - " + item.getName() + " " + item.getType()
-                                              + " " + item.getDescription());
-                        found = true;
-
-                    }
-                }
-
+                    System.out.println("Jogador: " + player.getFullName() + " - " + item.getName() + " " + item.getType()
+                            + " " + item.getDescription());
+                    found = true;
 
                 }
+            }
+        }
         if (!found) {
             System.out.println("Nao existe item com essa palavra");
         }

@@ -275,7 +275,7 @@ public class UI {
     private void searchItems(){
         System.out.println("Digite o nome do termo que gostaria de buscar");
         String nome = this.scanner.next();
-        players.SearchItem(nome);
+        players.searchItem(nome);
     }
 
 
