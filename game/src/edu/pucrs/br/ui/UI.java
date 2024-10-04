@@ -1,12 +1,13 @@
 package edu.pucrs.br.ui;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import edu.pucrs.br.item.ItemEntity;
 import edu.pucrs.br.player.PlayerEntity;
 import edu.pucrs.br.player.Players;
 import edu.pucrs.br.trade.TradeEntity;
 import edu.pucrs.br.trade.Trades;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UI {
     private Scanner scanner = new Scanner(System.in);
@@ -36,7 +37,7 @@ public class UI {
     }
 
     private void showAuthMenu() {
-       this.authMenuOptions();
+        this.authMenuOptions();
 
         try {
             do {
@@ -60,7 +61,8 @@ public class UI {
     }
 
     private void onLogin() {
-        // TODO: Mostrar todas as propostas de troca pendentes para o jogador logado (implementação: Eduardo Rosa)
+        // TODO: Mostrar todas as propostas de troca pendentes para o jogador logado
+        // (implementação: Eduardo Rosa)
 
         this.showOptionsMenu();
     }
@@ -108,7 +110,7 @@ public class UI {
                         this.showOptionsMenu();
                         break;
                     case 7:
-                        System.out.println("Pendente de implementação: Pedro Petrini | Aceite ou recusa de troca: Erick Carpes");
+                        this.showDetailsAboutTrade();
                         this.showOptionsMenu();
                         break;
                     case 8:
@@ -118,8 +120,9 @@ public class UI {
                     case 0:
                         System.exit(0);
 
-                    default: System.out.println("Opcao invalida. Redigite.");
-                    
+                    default:
+                        System.out.println("Opcao invalida. Redigite.");
+
                 }
             } while (true);
         } catch (Exception e) {
@@ -133,11 +136,11 @@ public class UI {
         System.out.print("[Login] Digite o seu PIN: ");
         String pin = this.scanner.next();
 
-        boolean result = this.players.login(email,pin);
-        if(result){
+        boolean result = this.players.login(email, pin);
+        if (result) {
             System.out.println("[Login] Bem-vindo(a) " + email + "!");
             this.onLogin();
-        }else{
+        } else {
             System.out.println("[Login] Email ou PIN incorretos!");
             this.showAuthMenu();
         }
@@ -170,7 +173,7 @@ public class UI {
         this.showAuthMenu();
     }
 
-    private void listPlayersItens(){
+    private void listPlayersItens() {
         players.listItensByPrice();
     }
 
@@ -197,7 +200,8 @@ public class UI {
 
         ArrayList<ItemEntity> targetItems = targetPlayer.getItems();
         if (targetItems.size() <= 0) {
-            System.out.println("[Trade] O jogador " + targetPlayer.getFullName() + " não possui nenhum item disponível para troca.");
+            System.out.println("[Trade] O jogador " + targetPlayer.getFullName()
+                    + " não possui nenhum item disponível para troca.");
             return;
         }
 
@@ -233,7 +237,8 @@ public class UI {
         }
 
         ItemEntity targetItem = targetItems.get(targetItemIndex - 1);
-        System.out.print("[Trade] Você confirma que deseja trocar o item " + targetItem.getName() + " por um item seu? (S/N) ");
+        System.out.print(
+                "[Trade] Você confirma que deseja trocar o item " + targetItem.getName() + " por um item seu? (S/N) ");
 
         String confirm = this.scanner.next();
         if (confirm.equalsIgnoreCase("n")) {
@@ -285,16 +290,16 @@ public class UI {
         this.trades.createTrade(trade);
 
         System.out.println("[Trade] Proposta de troca enviada com sucesso!");
-        this.showOptionsMenu();    
+        this.showOptionsMenu();
     }
 
-    private void searchItems(){
+    private void searchItems() {
         System.out.println("Digite o nome do termo que gostaria de buscar");
         String nome = this.scanner.next();
         players.searchItem(nome);
     }
 
-    public void showPendingTrades() {
+    private void showPendingTrades() {
         PlayerEntity p = this.players.getCurrentPlayer();
 
         ArrayList<TradeEntity> pendingTrades = this.trades.getPendingTrades(p);
@@ -311,12 +316,50 @@ public class UI {
             ItemEntity targetItem = trade.getTargetPlayer().getItem(trade.getTargetItem());
 
             System.out.println(count + " - " +
-                "Jogador solicitante: " + trade.getSourcePlayer().getFullName() + " | " +
-                "Jogador solicitado: " + trade.getTargetPlayer().getFullName() + " | " +
-                "Item oferecido: " + sourceItem.getName() + " | " +
-                "Item solicitado: " + targetItem.getName());
+                    "Jogador solicitante: " + trade.getSourcePlayer().getFullName() + " | " +
+                    "Jogador solicitado: " + trade.getTargetPlayer().getFullName() + " | " +
+                    "Item oferecido: " + sourceItem.getName() + " | " +
+                    "Item solicitado: " + targetItem.getName());
 
             count++;
+        }
+    }
+
+    private void showDetailsAboutTrade() {
+        PlayerEntity p = this.players.getCurrentPlayer();
+
+        ArrayList<TradeEntity> pendingTrades = this.trades.getPendingTrades(p);
+        if (pendingTrades.isEmpty()) {
+            System.out.println("[Trade] Nenhuma proposta de troca encontrada.");
+            return;
+        }
+
+        System.out.print("[Trade] Digite o número da proposta de troca que deseja visualizar: ");
+        int tradeIndex = this.scanner.nextInt();
+
+        if (tradeIndex <= 0 || tradeIndex > pendingTrades.size()) {
+            System.out.println("[Trade] Proposta de troca não encontrada.");
+            return;
+        }
+
+        TradeEntity trade = pendingTrades.get(tradeIndex - 1);
+        ItemEntity sourceItem = p.getItem(trade.getSourceItem());
+        ItemEntity targetItem = trade.getTargetPlayer().getItem(trade.getTargetItem());
+
+        System.out.println("[Trade] Detalhes da proposta de troca: ");
+        System.out.println("Jogador solicitante: " + trade.getSourcePlayer().getFullName());
+        System.out.println("Jogador solicitado: " + trade.getTargetPlayer().getFullName());
+        System.out.println("Item oferecido: " + sourceItem.getName());
+        System.out.println("Item solicitado: " + targetItem.getName());
+        System.out.print("[Trade] Deseja aceitar a proposta de troca? (S/N): ");
+
+        String confirm = this.scanner.next();
+        if (confirm.equalsIgnoreCase("s")) {
+            // this.trades.acceptTrade(trade);
+            System.out.println("[Trade] Proposta de troca aceita com sucesso!");
+        } else {
+            // this.trades.rejectTrade(trade);
+            System.out.println("[Trade] Proposta de troca rejeitada com sucesso!");
         }
     }
 }
