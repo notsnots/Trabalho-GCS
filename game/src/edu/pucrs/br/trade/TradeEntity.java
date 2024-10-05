@@ -50,4 +50,8 @@ public class TradeEntity {
         }
         return false;
     }
+
+    public void setStatus(TradeStatus status){
+        this.status = status;
+    }
 }
