@@ -21,7 +21,7 @@ public class Trades {
                 .stream()
                 .filter(trade ->
                         (trade.getTargetPlayer().getEmail().equals(p.getEmail()) || trade.getSourcePlayer().getEmail().equals(p.getEmail()))
-                                && !trade.isAccepted())
+                                && trade.isPending())
         .collect(Collectors.toCollection(ArrayList::new));
     }
 }

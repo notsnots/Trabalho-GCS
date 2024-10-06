@@ -2,21 +2,25 @@ package edu.pucrs.br.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 import edu.pucrs.br.item.ItemEntity;
 import edu.pucrs.br.player.PlayerEntity;
 import edu.pucrs.br.player.Players;
 import edu.pucrs.br.trade.TradeEntity;
+import edu.pucrs.br.trade.TradeStatus;
 import edu.pucrs.br.trade.Trades;
 
 public class UI {
     private Scanner scanner = new Scanner(System.in);
     private Players players;
     private Trades trades;
+    private TradeStatus status;
 
-    public UI(Players players, Trades trades) {
+    public UI(Players players, Trades trades, TradeStatus status) {
         this.players = players;
         this.trades = trades;
+        this.status = status;
 
         this.initUI();
     }
@@ -343,23 +347,52 @@ public class UI {
         }
 
         TradeEntity trade = pendingTrades.get(tradeIndex - 1);
+        PlayerEntity targetPlayer = trade.getTargetPlayer();
+
         ItemEntity sourceItem = p.getItem(trade.getSourceItem());
-        ItemEntity targetItem = trade.getTargetPlayer().getItem(trade.getTargetItem());
+        ItemEntity targetItem = targetPlayer.getItem(trade.getTargetItem());
 
-        System.out.println("[Trade] Detalhes da proposta de troca: ");
-        System.out.println("Jogador solicitante: " + trade.getSourcePlayer().getFullName());
-        System.out.println("Jogador solicitado: " + trade.getTargetPlayer().getFullName());
-        System.out.println("Item oferecido: " + sourceItem.getName());
-        System.out.println("Item solicitado: " + targetItem.getName());
-        System.out.print("[Trade] Deseja aceitar a proposta de troca? (S/N): ");
+        UUID sourceItemID = sourceItem.getId();
+        UUID targetItemID = targetItem.getId();
 
-        String confirm = this.scanner.next();
-        if (confirm.equalsIgnoreCase("s")) {
-            // this.trades.acceptTrade(trade);
-            System.out.println("[Trade] Proposta de troca aceita com sucesso!");
-        } else {
-            // this.trades.rejectTrade(trade);
-            System.out.println("[Trade] Proposta de troca rejeitada com sucesso!");
+
+        String confirm;
+        do{
+            System.out.println("[Trade] Detalhes da proposta de troca: ");
+            System.out.println("Jogador solicitante: " + trade.getSourcePlayer().getFullName());
+            System.out.println("Jogador solicitado: " + trade.getTargetPlayer().getFullName());
+            System.out.println("Item oferecido: " + sourceItem.getName());
+            System.out.println("Item solicitado: " + targetItem.getName());
+            System.out.print("[Trade] Deseja aceitar a proposta de troca?");
+            System.out.println("Digite 'S' para sim | 'N' para não | 'P' para deixar ela pendente: ");
+
+            confirm = this.scanner.next();
+            if(!confirm.equalsIgnoreCase("s") && !confirm.equalsIgnoreCase("n") && !confirm.equalsIgnoreCase("p")){
+                System.out.println("Opção inválida, tente novamente!");
+                System.out.println("--------------------------------");
+            }
+        }while(!confirm.equalsIgnoreCase("s") && !confirm.equalsIgnoreCase("n") && !confirm.equalsIgnoreCase("p"));
+
+        confirm = confirm.toLowerCase();
+        switch (confirm){
+            case "s":
+                System.out.println("Proposta de troca aceita com sucesso!");
+                trade.setStatus(TradeStatus.ACCEPTED);
+
+                p.addItem(targetItem);
+                p.removeItem(sourceItemID);
+
+                targetPlayer.addItem(sourceItem);
+                targetPlayer.removeItem(targetItemID);
+                break;
+            case "n":
+                System.out.println("Proposta de troca rejeitada com sucesso!");
+                trade.setStatus(TradeStatus.DENIED);
+                break;
+            case "p":
+                System.out.println("Proposta de troca continuará pendente!");
+                break;
         }
+
     }
 }
