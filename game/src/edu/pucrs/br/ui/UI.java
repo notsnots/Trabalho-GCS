@@ -2,6 +2,7 @@ package edu.pucrs.br.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 import edu.pucrs.br.item.ItemEntity;
 import edu.pucrs.br.player.PlayerEntity;
@@ -346,8 +347,13 @@ public class UI {
         }
 
         TradeEntity trade = pendingTrades.get(tradeIndex - 1);
+        PlayerEntity targetPlayer = trade.getTargetPlayer();
+
         ItemEntity sourceItem = p.getItem(trade.getSourceItem());
-        ItemEntity targetItem = trade.getTargetPlayer().getItem(trade.getTargetItem());
+        ItemEntity targetItem = targetPlayer.getItem(trade.getTargetItem());
+
+        UUID sourceItemID = sourceItem.getId();
+        UUID targetItemID = targetItem.getId();
 
 
         String confirm;
@@ -361,6 +367,10 @@ public class UI {
             System.out.println("Digite 'S' para sim | 'N' para não | 'P' para deixar ela pendente: ");
 
             confirm = this.scanner.next();
+            if(!confirm.equalsIgnoreCase("s") && !confirm.equalsIgnoreCase("n") && !confirm.equalsIgnoreCase("p")){
+                System.out.println("Opção inválida, tente novamente!");
+                System.out.println("--------------------------------");
+            }
         }while(!confirm.equalsIgnoreCase("s") && !confirm.equalsIgnoreCase("n") && !confirm.equalsIgnoreCase("p"));
 
         confirm = confirm.toLowerCase();
@@ -368,6 +378,12 @@ public class UI {
             case "s":
                 System.out.println("Proposta de troca aceita com sucesso!");
                 trade.setStatus(TradeStatus.ACCEPTED);
+
+                p.addItem(targetItem);
+                p.removeItem(sourceItemID);
+
+                targetPlayer.addItem(sourceItem);
+                targetPlayer.removeItem(targetItemID);
                 break;
             case "n":
                 System.out.println("Proposta de troca rejeitada com sucesso!");

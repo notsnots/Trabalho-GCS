@@ -44,12 +44,13 @@ public class TradeEntity {
         return this.sourceItemId;
     }
 
-    public boolean isAccepted(){
-        if(this.status == TradeStatus.ACCEPTED){
+    public boolean isPending(){
+        if(this.status == TradeStatus.PENDING){
             return true;
         }
         return false;
     }
+
 
     public void setStatus(TradeStatus status){
         this.status = status;
