@@ -7,7 +7,7 @@
 - [Pedro Petrini] (https://github.com/petrinks)
 - [Bernardo Medeiros](https://github.com/BernardoLykawka)
 - [Erick Carpes](https://github.com/erickcarpes)
-- Felipe Rambor
+- [Felipe Rambor](https://github.com/felipeprambor)
 - Iuri Queiroz
 - [Regis Junior](https://github.com/regisamxjr)
 - [Pedro Henrique de Oliveira](https://github.com/deoliveiraph)
