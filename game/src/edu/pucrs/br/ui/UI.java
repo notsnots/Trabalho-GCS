@@ -98,7 +98,7 @@ public class UI {
                         this.showOptionsMenu();
                         break;
                     case 3:
-                        System.out.println("Pendente de implementação: Felipe Rambor");
+                        this.listaItensOrdemAlfabetica();
                         this.showOptionsMenu();
                         break;
                     case 4:
@@ -303,6 +303,11 @@ public class UI {
         players.searchItem(nome);
     }
 
+    private void listaItensOrdemAlfabetica() {
+
+        players.listaItensOrdemAlfabetica();
+
+    }
     private void showPendingTrades() {
         PlayerEntity p = this.players.getCurrentPlayer();
 
