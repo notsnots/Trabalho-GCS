@@ -45,11 +45,18 @@ public class TradeEntity {
     }
 
     public boolean isPending(){
-        if(this.status == TradeStatus.PENDING){
-            return true;
-        }
-        return false;
+        return this.status == TradeStatus.PENDING;
     }
+
+    public boolean isAccepted(){
+        return this.status == TradeStatus.ACCEPTED;
+    }
+
+    public boolean isDenied(){
+        return this.status == TradeStatus.DENIED;
+    }
+
+
 
 
     public void setStatus(TradeStatus status){

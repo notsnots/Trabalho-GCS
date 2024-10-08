@@ -88,7 +88,7 @@ public class UI {
                 int option = scanner.nextInt();
                 switch (option) {
                     case 1:
-                        System.out.println("Pendente de implementação: Iuri Queiroz");
+                        this.registerItem();
                         this.showOptionsMenu();
                         break;
                     case 2:
@@ -96,7 +96,7 @@ public class UI {
                         this.showOptionsMenu();
                         break;
                     case 3:
-                        this.listaItensOrdemAlfabetica();
+                        this.listPlayersItemByAlphabeticalOrder();
                         this.showOptionsMenu();
                         break;
                     case 4:
@@ -116,7 +116,7 @@ public class UI {
                         this.showOptionsMenu();
                         break;
                     case 8:
-                        System.out.println("Pendente de implementação: Lucas Arieta");
+                        this.showGameStatistics();
                         this.showOptionsMenu();
                         break;
                     case 0:
@@ -178,7 +178,6 @@ public class UI {
         players.listItensByPrice();
     }
 
-  
     private void registerItem(){
         System.out.println("Nome do item: ");
         String nome = this.scanner.next();
@@ -350,11 +349,12 @@ public class UI {
         players.searchItem(nome);
     }
 
-    private void listaItensOrdemAlfabetica() {
+    private void listPlayersItemByAlphabeticalOrder() {
 
         players.listaItensOrdemAlfabetica();
 
     }
+
     private void showPendingTrades() {
         PlayerEntity p = this.players.getCurrentPlayer();
 
@@ -446,5 +446,23 @@ public class UI {
                 break;
         }
 
+    }
+
+    public void showGameStatistics() {
+        int players = this.players.getPlayersSize();
+        int itens = this.players.getTotalItens();
+        int totalItensPrices = this.players.getTotalItensPrices();
+        int totalTrades = this.trades.getTotalTrades();
+        int acceptedTrades = this.trades.getTotalAcceptedTrades();
+        int deniedTrades = this.trades.getTotalDeniedTrades();
+        int pendingTrades = this.trades.getTotalPendingTrades();
+
+        System.out.println("Quantidade de jogadores: " + players);
+        System.out.println("Quantidade de itens: " + itens);
+        System.out.println("Soma total dos preços dos itens: " + totalItensPrices);
+        System.out.println("Quantidade total de propostas de troca: " + totalTrades);
+        System.out.println("Quantidade de propostas de troca aceitas: " + acceptedTrades);
+        System.out.println("Quantidade de propostas de troca recusadas: " + deniedTrades);
+        System.out.println("Quantidade de propostas de troca pendentes: " + pendingTrades);
     }
 }

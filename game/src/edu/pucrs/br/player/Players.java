@@ -127,4 +127,26 @@ public class Players {
             }
         }
     }
+
+    public int getPlayersSize() {
+        return players.size();
+    }
+
+    public int getTotalItens() {
+        int total = 0;
+        for (PlayerEntity player : players) {
+            total += player.getItems().size();
+        }
+        return total;
+    }
+
+    public int getTotalItensPrices() {
+        int total = 0;
+        for (PlayerEntity player : players) {
+            for (ItemEntity item : player.getItems()) {
+                total += item.getPrice();
+            }
+        }
+        return total;
+    }
 }

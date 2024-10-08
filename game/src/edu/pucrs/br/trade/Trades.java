@@ -24,4 +24,29 @@ public class Trades {
                                 && trade.isPending())
         .collect(Collectors.toCollection(ArrayList::new));
     }
+
+    public int getTotalTrades(){
+        return trades.size();
+    }
+
+    public int getTotalPendingTrades(){
+        return (int) trades
+                .stream()
+                .filter(TradeEntity::isPending)
+                .count();
+    }
+
+    public int getTotalAcceptedTrades(){
+        return (int) trades
+                .stream()
+                .filter(TradeEntity::isAccepted)
+                .count();
+    }
+
+    public int getTotalDeniedTrades(){
+        return (int) trades
+                .stream()
+                .filter(TradeEntity::isDenied)
+                .count();
+    }
 }
