@@ -8,7 +8,7 @@
 - [Bernardo Medeiros](https://github.com/BernardoLykawka)
 - [Erick Carpes](https://github.com/erickcarpes)
 - [Felipe Rambor](https://github.com/felipeprambor)
-- Iuri Queiroz
+- [Iuri Queiroz](https://github.com/IuriQueirozz)
 - [Regis Junior](https://github.com/regisamxjr)
 - [Pedro Henrique de Oliveira](https://github.com/deoliveiraph)
 - [Luiza Michel](https://github.com/lu4mic)
