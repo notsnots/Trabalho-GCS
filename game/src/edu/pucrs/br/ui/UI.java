@@ -1,5 +1,8 @@
 package edu.pucrs.br.ui;
 
+import edu.pucrs.br.item.ItemEntity;
+import edu.pucrs.br.item.ItemTypes;
+import edu.pucrs.br.player.PlayerEntity;
 import edu.pucrs.br.player.Players;
 import edu.pucrs.br.trade.Trades;
 
@@ -128,4 +131,62 @@ public class UI {
     private void listPlayersItens(){
         players.listItensByPrice();
     }
+    //iuri em andamento
+    private void registerItem(){ //registrar itens
+        System.out.println("Nome do item: ");
+        String nome = this.scanner.next();
+
+        System.out.println("Descrição do item: ");
+        String description= this.scanner.next();
+
+        System.out.println("Valor do item: ");
+        double valor = this.scanner.nextDouble();
+
+        System.out.println("[===================]");
+        System.out.println("Selecione o tipo de item:");
+        System.out.println("1- Armor");
+        System.out.println("2- Weapon");
+        System.out.println("3- Potion");
+        System.out.println("4- Key");
+        System.out.println("5- Quest");
+        System.out.println("[===================]");
+        System.out.print("Digite o número da opção desejada: ");
+
+        int Option = scanner.nextInt(); // escolha de qual tipo de item
+        ItemTypes tipo = null;
+
+        switch (Option) {
+            case 1:
+                tipo = ItemTypes.ARMOR;
+                break;
+            case 2:
+                tipo = ItemTypes.WEAPON;
+                break;
+            case 3:
+                tipo = ItemTypes.POTION;
+                break;
+            case 4:
+                tipo = ItemTypes.KEY;
+                break;
+            case 5:
+                tipo = ItemTypes.QUEST;
+                break;
+            default:
+                System.out.println("ERRO: tenta de novo ai vai.");
+                return;
+        }
+
+        long id = (long) (Math.random() * 1000); // trocar para uuid gerador de id unico adaptativo
+
+        ItemEntity item = new ItemEntity(nome, description, tipo, valor);
+        PlayerEntity currentPlayer = this.players.currentPlayer;
+
+        currentPlayer.addItem(item);
+
+   
+
+
+
+    }
+
 }
