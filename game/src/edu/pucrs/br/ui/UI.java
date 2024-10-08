@@ -160,3 +160,25 @@ private void registerItem(){ //registrar itens
     int Option = scanner.nextInt(); // escolha de qual tipo de item
     ItemTypes tipo = null;
 
+    switch (Option) {
+        case 1:
+            tipo = ItemTypes.ARMOR;
+            break;
+        case 2:
+            tipo = ItemTypes.WEAPON;
+            break;
+        case 3:
+            tipo = ItemTypes.POTION;
+            break;
+        case 4:
+            tipo = ItemTypes.KEY;
+            break;
+        case 5:
+            tipo = ItemTypes.QUEST;
+            break;
+        default:
+            System.out.println("ERRO: tenta de novo ai vai.");
+            return;
+    }
+
+
