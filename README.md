@@ -4,7 +4,7 @@
 - [Lucas Arieta](https://github.com/lucasarieta)
 - [Eduardo Rosa](https://github.com/notsnots)
 - [Bernardo Kirsch](https://github.com/kirschzao)  
-- [Pedro Petrini] (https://github.com/petrinks)
+- [Pedro Petrini](https://github.com/petrinks)
 - [Bernardo Medeiros](https://github.com/BernardoLykawka)
 - [Erick Carpes](https://github.com/erickcarpes)
 - [Felipe Rambor](https://github.com/felipeprambor)
