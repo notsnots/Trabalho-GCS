@@ -180,5 +180,19 @@ private void registerItem(){ //registrar itens
             System.out.println("ERRO: tenta de novo ai vai.");
             return;
     }
+    ItemEntity item = new ItemEntity(nome, description, tipo, valor);
+    int codigoUnico = (int) (Math.random() * 10000); // aqui eu buguei, n sabia quantos eu botava kkk
+    item.setCodigoUnico(codigoUnico);
+
+
+    PlayerEntity currentPlayer = this.players.currentPlayer;
+
+
+    currentPlayer.addItem(item);
+
+
+}
+
+
 
 
