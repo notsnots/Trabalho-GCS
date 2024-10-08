@@ -1,10 +1,8 @@
 package edu.pucrs.br.player;
 
 import edu.pucrs.br.item.ItemEntity;
-
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.UUID;
 
 public class Players {
     private final ArrayList<PlayerEntity> players = new ArrayList<>();
@@ -15,6 +13,10 @@ public class Players {
                 .filter(p -> p.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public PlayerEntity getCurrentPlayer() {
+        return this.currentPlayer;
     }
 
     /*
@@ -40,33 +42,92 @@ public class Players {
             this.currentPlayer = player;
             return true;
         }
-        
+
         return false;
     }
 ''
     public void listItensByPrice() {
 
-        if(players.isEmpty()) {
+        if (players.isEmpty()) {
             System.out.println("Nenhum jogador encontrado!");
             return;
         }
 
-        for (PlayerEntity player : this.players)
-        {
+        for (PlayerEntity player : this.players) {
             ArrayList<ItemEntity> items = player.getItems();
 
-            if(items.isEmpty()){
+            if (items.isEmpty()) {
                 System.out.println("Nenhum item encontrado para o player: " + player.getFullName());
                 continue;
             }
-                System.out.println("Itens do Player: " + player.getFullName()+": ");
+            System.out.println("Itens do Player: " + player.getFullName() + ": ");
 
             items.sort(Comparator.comparing(ItemEntity::getPrice));
 
-            for(ItemEntity item : items){
+            for (ItemEntity item : items) {
                 System.out.println(item.toString());
             }
             System.out.println();
+        }
+    }
+
+    public void searchItem(String nome) {
+        String term = nome.toLowerCase();
+        boolean found = false;
+        if (players.isEmpty()) {
+            System.out.println("Nenhum jogador encontrado!");
+            return;
+        }
+        for (int i = 0; i < players.size(); i++) {
+            PlayerEntity player = players.get(i);
+            ArrayList<ItemEntity> items = player.getItems();
+
+            for (int j = 0; j < items.size(); j++) {
+                ItemEntity item = items.get(j);
+
+                if (item.getName().toLowerCase().contains(term) || item.getDescription().toLowerCase().contains(term) ||
+                        item.getType().name().toLowerCase().contains(term)) {
+
+                    System.out.println("Jogador: " + player.getFullName() + " - " + item.getName() + " " + item.getType()
+                            + " " + item.getDescription());
+                    found = true;
+
+                }
+            }
+        }
+        if (!found) {
+            System.out.println("Nao existe item com essa palavra");
+        }
+    }
+
+
+    public void listaItensOrdemAlfabetica() { //ve pra mim se é isso ai que tu quer lucas <3   =) (desculpa o atraso e a vagabundice pra fazer isso)
+
+        if (players.isEmpty()) {
+
+            System.out.println("Nenhum jogador encontrado!");
+            return;
+
+        }
+
+        for (PlayerEntity player : this.players) {
+            ArrayList<ItemEntity> items = player.getItems();
+
+            if (items.isEmpty()) {
+
+                System.out.println("Nenhum item encontrado para o player: " + player.getFullName());
+                continue;
+
+            }
+
+            items.sort(Comparator.comparing(ItemEntity::getName));
+
+            System.out.println("Itens do jogador " + currentPlayer.getFullName() + ":");
+            for (ItemEntity item : items) {
+
+                System.out.println(item.toString());
+
+            }
         }
     }
 }
