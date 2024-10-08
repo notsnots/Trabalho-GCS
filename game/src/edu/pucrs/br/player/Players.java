@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class Players {
     private final ArrayList<PlayerEntity> players = new ArrayList<>();
-    private PlayerEntity currentPlayer;
+    public PlayerEntity currentPlayer;
 
     public PlayerEntity getByEmail(String email) {
         return players.stream()
@@ -45,7 +45,7 @@ public class Players {
 
         return false;
     }
-
+''
     public void listItensByPrice() {
 
         if (players.isEmpty()) {
