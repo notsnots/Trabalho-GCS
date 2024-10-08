@@ -100,7 +100,8 @@ public class UI {
                         System.out.println("Pendente de implementação: Lucas Arieta");
                         break;
 
-                    default: System.out.println("Opcao invalida. Redigite.");
+                    default:
+                        System.out.println("Opcao invalida. Redigite.");
                 }
             } while (true);
         } catch (Exception e) {
@@ -114,11 +115,11 @@ public class UI {
         System.out.println("Digite o seu PIN: ");
         String pin = this.scanner.next();
 
-        boolean result = this.players.login(email,pin);
-        if(result){
+        boolean result = this.players.login(email, pin);
+        if (result) {
             System.out.println("Login efetuado com sucesso!");
             this.onLogin();
-        }else{
+        } else {
             System.out.println("Erro ao fazer login!");
             this.showAuthMenu();
         }
@@ -128,65 +129,34 @@ public class UI {
         // TODO: Implementar sistema de registro
     }
 
-    private void listPlayersItens(){
+    private void listPlayersItens() {
         players.listItensByPrice();
     }
-    //iuri em andamento
-    private void registerItem(){ //registrar itens
-        System.out.println("Nome do item: ");
-        String nome = this.scanner.next();
-
-        System.out.println("Descrição do item: ");
-        String description= this.scanner.next();
-
-        System.out.println("Valor do item: ");
-        double valor = this.scanner.nextDouble();
-
-        System.out.println("[===================]");
-        System.out.println("Selecione o tipo de item:");
-        System.out.println("1- Armor");
-        System.out.println("2- Weapon");
-        System.out.println("3- Potion");
-        System.out.println("4- Key");
-        System.out.println("5- Quest");
-        System.out.println("[===================]");
-        System.out.print("Digite o número da opção desejada: ");
-
-        int Option = scanner.nextInt(); // escolha de qual tipo de item
-        ItemTypes tipo = null;
-
-        switch (Option) {
-            case 1:
-                tipo = ItemTypes.ARMOR;
-                break;
-            case 2:
-                tipo = ItemTypes.WEAPON;
-                break;
-            case 3:
-                tipo = ItemTypes.POTION;
-                break;
-            case 4:
-                tipo = ItemTypes.KEY;
-                break;
-            case 5:
-                tipo = ItemTypes.QUEST;
-                break;
-            default:
-                System.out.println("ERRO: tenta de novo ai vai.");
-                return;
-        }
-
-        long id = (long) (Math.random() * 1000); // trocar para uuid gerador de id unico adaptativo
-
-        ItemEntity item = new ItemEntity(nome, description, tipo, valor);
-        PlayerEntity currentPlayer = this.players.currentPlayer;
-
-        currentPlayer.addItem(item);
-
-   
-
-
-
-    }
-
 }
+//iuri em andamento
+
+
+private void registerItem(){ //registrar itens
+    System.out.println("Nome do item: ");
+    String nome = this.scanner.next();
+    System.out.println("Descrição do item: ");
+    String description= this.scanner.next();
+
+
+    System.out.println("Valor do item: ");
+    double valor = this.scanner.nextDouble();
+
+
+    System.out.println("[===================]");
+    System.out.println("Selecione o tipo de item:");
+    System.out.println("1- Armor");
+    System.out.println("2- Weapon");
+    System.out.println("3- Potion");
+    System.out.println("4- Key");
+    System.out.println("5- Quest");
+    System.out.println("[===================]");
+    System.out.print("Digite o número da opção desejada: ");
+
+    int Option = scanner.nextInt(); // escolha de qual tipo de item
+    ItemTypes tipo = null;
+
