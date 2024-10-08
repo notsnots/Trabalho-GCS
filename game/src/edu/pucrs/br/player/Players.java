@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class Players {
     private final ArrayList<PlayerEntity> players = new ArrayList<>();
-    public PlayerEntity currentPlayer;
+    private PlayerEntity currentPlayer;
 
     public PlayerEntity getByEmail(String email) {
         return players.stream()
@@ -45,7 +45,7 @@ public class Players {
 
         return false;
     }
-''
+
     public void listItensByPrice() {
 
         if (players.isEmpty()) {
@@ -78,13 +78,10 @@ public class Players {
             System.out.println("Nenhum jogador encontrado!");
             return;
         }
-        for (int i = 0; i < players.size(); i++) {
-            PlayerEntity player = players.get(i);
+        for (PlayerEntity player : players) {
             ArrayList<ItemEntity> items = player.getItems();
 
-            for (int j = 0; j < items.size(); j++) {
-                ItemEntity item = items.get(j);
-
+            for (ItemEntity item : items) {
                 if (item.getName().toLowerCase().contains(term) || item.getDescription().toLowerCase().contains(term) ||
                         item.getType().name().toLowerCase().contains(term)) {
 
@@ -101,7 +98,7 @@ public class Players {
     }
 
 
-    public void listaItensOrdemAlfabetica() { //ve pra mim se é isso ai que tu quer lucas <3   =) (desculpa o atraso e a vagabundice pra fazer isso)
+    public void listaItensOrdemAlfabetica() {
 
         if (players.isEmpty()) {
 

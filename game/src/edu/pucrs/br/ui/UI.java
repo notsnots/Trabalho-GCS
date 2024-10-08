@@ -15,12 +15,10 @@ public class UI {
     private Scanner scanner = new Scanner(System.in);
     private Players players;
     private Trades trades;
-    private TradeStatus status;
 
-    public UI(Players players, Trades trades, TradeStatus status) {
+    public UI(Players players, Trades trades) {
         this.players = players;
         this.trades = trades;
-        this.status = status;
 
         this.initUI();
     }
@@ -179,54 +177,55 @@ public class UI {
     private void listPlayersItens() {
         players.listItensByPrice();
     }
-]
+
   
-private void registerItem(){
-    System.out.println("Nome do item: ");
-    String nome = this.scanner.next();
-    System.out.println("Descrição do item: ");
-    String description= this.scanner.next();
+    private void registerItem(){
+        System.out.println("Nome do item: ");
+        String nome = this.scanner.next();
+        System.out.println("Descrição do item: ");
+        String description= this.scanner.next();
 
 
-    System.out.println("Valor do item: ");
-    double valor = this.scanner.nextDouble();
+        System.out.println("Valor do item: ");
+        double valor = this.scanner.nextDouble();
 
-    System.out.println("[===================]");
-    System.out.println("Selecione o tipo de item:");
-    System.out.println("1- Armor");
-    System.out.println("2- Weapon");
-    System.out.println("3- Potion");
-    System.out.println("4- Key");
-    System.out.println("5- Quest");
-    System.out.println("[===================]");
-    System.out.print("Digite o número da opção desejada: ");
+        System.out.println("[===================]");
+        System.out.println("Selecione o tipo de item:");
+        System.out.println("1- Armor");
+        System.out.println("2- Weapon");
+        System.out.println("3- Potion");
+        System.out.println("4- Key");
+        System.out.println("5- Quest");
+        System.out.println("[===================]");
+        System.out.print("Digite o número da opção desejada: ");
 
-    int Option = scanner.nextInt(); // escolha de qual tipo de item
-    ItemTypes tipo = null;
+        int Option = scanner.nextInt(); // escolha de qual tipo de item
+        ItemTypes tipo = null;
 
-    switch (Option) {
-        case 1:
-            tipo = ItemTypes.ARMOR;
-            break;
-        case 2:
-            tipo = ItemTypes.WEAPON;
-            break;
-        case 3:
-            tipo = ItemTypes.POTION;
-            break;
-        case 4:
-            tipo = ItemTypes.KEY;
-            break;
-        case 5:
-            tipo = ItemTypes.QUEST;
-            break;
-        default:
-            System.out.println("ERRO: tenta de novo ai vai.");
-            return;
-    }
-    ItemEntity item = new ItemEntity(nome, description, tipo, valor);
-    PlayerEntity currentPlayer = this.players.getCurrentPlayer();
-    currentPlayer.addItem(item);
+        switch (Option) {
+            case 1:
+                tipo = ItemTypes.ARMOR;
+                break;
+            case 2:
+                tipo = ItemTypes.WEAPON;
+                break;
+            case 3:
+                tipo = ItemTypes.POTION;
+                break;
+            case 4:
+                tipo = ItemTypes.KEY;
+                break;
+            case 5:
+                tipo = ItemTypes.QUEST;
+                break;
+            default:
+                System.out.println("ERRO: tenta de novo ai vai.");
+                return;
+        }
+
+        ItemEntity item = new ItemEntity(nome, description, tipo, valor);
+        PlayerEntity currentPlayer = this.players.getCurrentPlayer();
+        currentPlayer.addItem(item);
 }
 
     private void createTradeProposal() {
