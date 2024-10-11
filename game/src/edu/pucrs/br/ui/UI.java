@@ -2,6 +2,8 @@ package edu.pucrs.br.ui;
 
 import edu.pucrs.br.item.ItemEntity;
 import edu.pucrs.br.item.ItemTypes;
+import edu.pucrs.br.item.LootBox;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
@@ -79,6 +81,7 @@ public class UI {
         System.out.println("6 - [Player] Mostrar minhas propostas de troca pendentes");
         System.out.println("7 - [Player] Detalhes sobre proposta de troca");
         System.out.println("8 - [Admin] Estatísticas do jogo");
+        System.out.println("9 - [Player] Abrir Caixa do Herói");
         System.out.println("0 - [Any] - Sair do programa");
         System.out.println("[===================]");
         System.out.print("Digite a opcao desejada: ");
@@ -117,6 +120,10 @@ public class UI {
                         break;
                     case 8:
                         this.showGameStatistics();
+                        this.showOptionsMenu();
+                        break;
+                    case 9:
+                        this.openLootBox();
                         this.showOptionsMenu();
                         break;
                     case 0:
@@ -464,5 +471,13 @@ public class UI {
         System.out.println("Quantidade de propostas de troca aceitas: " + acceptedTrades);
         System.out.println("Quantidade de propostas de troca recusadas: " + deniedTrades);
         System.out.println("Quantidade de propostas de troca pendentes: " + pendingTrades);
+    }
+
+    public void openLootBox(){
+        LootBox box = new LootBox();
+        this.players.getCurrentPlayer().addItem(box.openLootBox());
+    
+        System.out.println();
+        
     }
 }
