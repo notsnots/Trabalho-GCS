@@ -64,6 +64,15 @@ public class PlayerEntity {
             .orElse(null);
     }
 
+    public double getValorTotalInventário(){
+        double totalPrice = 0;
+
+        for(ItemEntity item: items){
+            totalPrice += item.getPrice();
+        }
+        return totalPrice;
+    }
+
     public ItemEntity getFirst(){
         if (items.isEmpty()) {
             System.out.println("O jogador não tem itens.");

@@ -78,7 +78,8 @@ public class UI {
         System.out.println("5 - [Player] Propor troca de itens para outro jogador");
         System.out.println("6 - [Player] Mostrar minhas propostas de troca pendentes");
         System.out.println("7 - [Player] Detalhes sobre proposta de troca");
-        System.out.println("8 - [Admin] Estatísticas do jogo");
+        System.out.println("8 - [Player] Listar jogadores pelo valor do inventário");
+        System.out.println("9 - [Admin] Estatísticas do jogo");
         System.out.println("0 - [Any] - Sair do programa");
         System.out.println("[===================]");
         System.out.print("Digite a opcao desejada: ");
@@ -116,6 +117,10 @@ public class UI {
                         this.showOptionsMenu();
                         break;
                     case 8:
+                        this.listPlayersByInventoryPrice();
+                        this.showOptionsMenu();   
+                        break;
+                    case 9:
                         this.showGameStatistics();
                         this.showOptionsMenu();
                         break;
@@ -464,5 +469,9 @@ public class UI {
         System.out.println("Quantidade de propostas de troca aceitas: " + acceptedTrades);
         System.out.println("Quantidade de propostas de troca recusadas: " + deniedTrades);
         System.out.println("Quantidade de propostas de troca pendentes: " + pendingTrades);
+    }
+
+    public void listPlayersByInventoryPrice(){
+        players.listPlayersByInventoryPrice();
     }
 }

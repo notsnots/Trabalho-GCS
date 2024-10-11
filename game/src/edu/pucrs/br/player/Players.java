@@ -71,6 +71,42 @@ public class Players {
         }
     }
 
+    public void listPlayersByInventoryPrice(){
+        if (players.isEmpty()) {
+            System.out.println("Nenhum jogador encontrado!");
+            return;
+
+        }
+
+        for(int i=0;i<players.size();i++){
+            boolean trocou = false;
+
+            for(int j=players.size()-1;j>i;j--){
+                if(players.get(j-1).getValorTotalInventário() > players.get(j).getValorTotalInventário()){
+                    PlayerEntity temp = players.get(j);
+                    players.set(j, players.get(j-1));
+                    players.set(j-1, temp);
+                    trocou = true;
+                }
+            }
+
+            if(!trocou){
+                break;
+            }
+        }
+
+        int i=1;
+        for(PlayerEntity player: players){
+            System.out.println(i+"° - Nome: "+player.getFullName()+"\nValor do Inventário: "+player.getValorTotalInventário()+" {");
+            for(ItemEntity item : player.getItems()){
+                System.out.println("    "+item.getName()+", R$"+item.getPrice());
+            }
+            System.out.println("}");
+            System.out.println();
+            i++;
+        }
+    }
+
     public void searchItem(String nome) {
         String term = nome.toLowerCase();
         boolean found = false;
