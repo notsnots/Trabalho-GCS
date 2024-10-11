@@ -78,14 +78,14 @@ public class Players {
 
         }
 
-        for(int i=0;i<players.size();i++){
+        for(int i=0;i<players.size()-1;i++){
             boolean trocou = false;
 
-            for(int j=players.size()-1;j>i;j--){
-                if(players.get(j-1).getValorTotalInventário() > players.get(j).getValorTotalInventário()){
+            for(int j=0;j<players.size()-1;j++){
+                if(players.get(j).getValorTotalInventário() < players.get(j+1).getValorTotalInventário()){
                     PlayerEntity temp = players.get(j);
-                    players.set(j, players.get(j-1));
-                    players.set(j-1, temp);
+                    players.set(j, players.get(j+1));
+                    players.set(j+1, temp);
                     trocou = true;
                 }
             }
